@@ -1,10 +1,7 @@
 # My Website
-### So today I made my own website
-I made it in a tutorial in Hackclub, and here's what I learnt
+### This is my very first website that I have coded without using AI
+This website was created when I was first introduced to Hackclub - a legendary organisation that would hopefully help me get real minecraft, and a good phone, and my own laptop one fine day.
+I learnt:
 - HTML, Tailwind CSS
-- Image, paragrphs, formatting, classes, headings
-**Lowk it was pretty fun ya know!**
-
-## Preview
-
-![Website Preview](https://cdn.hackclub.com/019f20ad-04ff-7a39-bd0a-c4b69e515cca/screenshot.png)
+- Classes, Paragraphs, Body, Headings, Markdown, Formatting
+Now I shall get back to constantly updating this webstie, code code code!
