@@ -5,4 +5,5 @@ I learnt:
 - HTML, Tailwind CSS
 - Classes, Paragraphs, Body, Headings, Markdown, Formatting
 
-Now I shall get back to constantly updating this webstie, code code code!
+Now I shall get back to constantly updating this website, code code code!
+Please cope with the mid designs, as I am still learning Tailwind CSS and HTML. Thank you!
