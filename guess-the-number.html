@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>Harshith RS - Games</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap" rel="stylesheet">
+    </head>
+    <body class="bg-blue-400 text-center">
+        <h1 class="text-6xl font-[Syne] font-bold text-blue-800 mx-auto my-4">Guess the Number</h1>
+        <div class="border-4 border-blue-800/50 rounded-xl shadow-[0_0_20px_rgba(0,151,255,1)] mt-6"></div>
+        <div class="flex flex-row items-center justify-center mt-6 mb-4 p-4">
+            <p class="text-3xl font-[Syne] text-blue-800">Range: </p>
+            <input type="number" id="min" class="border-2 border-blue-500 rounded-xl p-2 text-2xl m-2" placeholder="Minimum">
+            <p class="text-3xl font-[Syne] text-blue-800">to</p>
+            <input type="number" id="max" class="border-2 border-blue-500 rounded-xl p-2 text-2xl m-2" placeholder="Maximum">
+        </div>
+        <button onclick="generateRandomNumber()" class="active:scale-50 bg-blue-500 border-2 border-blue-500 mx-auto p-3 text-blue-900 font-[Syne] font-bold rounded-xl text-3xl transition-all duration-500 ease-in-out hover:scale-110 shadow-[0_0_40px_rgba(0,100,255,1)] my-2">Generate Random Number</button>
+        <div class="flex flex-row items-center justify-center mt-6 mb-4 p-4">
+            <p class="text-3xl font-[Syne] text-blue-800">Your Guess: </p>
+            <input type="number" id="guess" class="border-2 border-blue-500 rounded-xl p-2 text-2xl m-2" placeholder="Enter your guess">
+        </div>
+        <button onclick="checkGuess()" class="active:scale-50 bg-blue-500 border-2 border-blue-500 mx-auto p-3 text-blue-900 font-[Syne] font-bold rounded-xl text-3xl transition-all duration-500 ease-in-out hover:scale-110 shadow-[0_0_40px_rgba(0,100,255,1)] my-2">Guess</button>
+        <p id="display" class="text-3xl font-[Syne] text-blue-800 my-8">Enter your guess! Make sure to press "Guess"!</p>
+        <script>
+            let num;
+            let clicks = 0;
+            function generateRandomNumber() {
+                const min = parseInt(document.getElementById("min").value)
+                const max = parseInt(document.getElementById("max").value)
+                if (isNaN(min) || isNaN(max)) {
+                    document.getElementById("display").textContent = "Please enter valid numbers for the range!";
+                } else if (min >= max) {
+                    document.getElementById("display").textContent = "Minimum must be less than Maximum!";
+                } else {
+                    num = Math.floor(Math.random() * (max - min + 1)) + min;
+                    document.getElementById("display").textContent = "Random number generated! Now enter your guess!";
+                }
+            }
+            
+            function checkGuess() {
+                clicks++;
+                const guess = parseInt(document.getElementById("guess").value);
+                if (isNaN(guess)) {
+                    document.getElementById("display").textContent = "Please enter a valid number for your guess!";
+                } else if (guess < num) {
+                        document.getElementById("display").textContent = "Your guess is too low! Try again!";
+                } else if (guess > num) {
+                    document.getElementById("display").textContent = "Your guess is too high! Try again!";
+                } else {
+                    document.getElementById("display").textContent = "You guessed it in "+ clicks + " tries! The number was " + num + "!";
+                    clicks = 0;
+                }
+            }
+        </script>
+    </body>

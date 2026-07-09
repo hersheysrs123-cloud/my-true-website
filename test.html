@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS Testing Grounds</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+
+    <h1 class="text-5xl">Check the developer console!</h1>
+
+    <script>
+      // YOUR JS CODE GOES IN HERE!
+      const player = "Harshith";
+      let score = 0;
+      let clicks = 0;
+      
+      
+      score = score + 10;
+      
+      console.log(player);
+      console.log(score);
+      function trigger() {
+        clicks++
+        console.log(clicks);
+        let display = document.getElementById("score");
+        display.textContent = clicks;
+      }
+      let num = Math.floor(Math.random() * 10) + 1;
+      function triggerGuess(){
+        let guess = document.getElementById("guess").value;
+        let display = document.getElementById("display");
+        if (guess < num) {
+            display.textContent = "Your guess is too low! Try again!"
+        } else if (guess > num) {
+            display.textContent = "Your guess is too high! Try again!"
+        } else {
+            display.textContent = "You guessed it! The number was " + num + "!"
+        }
+      }
+    </script>
+    <button onclick="trigger()" class="bg-blue-500 mx-auto p-3 rounded-xl text-2xl">Click Me!</button>
+    <h1 id="score" class="text-3xl">0</h1>
+    <input type="number" id="guess" class="border-2 border-blue-500 rounded-xl p-2 text-2xl">
+    <button onclick="triggerGuess()" class="bg-blue-500 mx-auto p-3 rounded-xl text-2xl">Guess!</button>
+    <h1 id="display" class="text-3xl bg-sky-300 border-2 border-sky-500 rounded-xl p-2">Guess a number between 1 and 10!</h1>
+  </body>
+</html>
