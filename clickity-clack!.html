@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>Harshith RS - Games</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap" rel="stylesheet">
+    </head>
+    <body class="bg-blue-400 text-center">
+        <div class="flex flex-row items-center h-screen">
+            <div class="flex flex-col justify-center items-center w-4/12 border-r-8 border-blue-800 h-screen">
+                <button class="text-3xl font-[Syne] font-bold text-blue-900 mx-auto my-6 transition duration-200 ease-in-out [text-shadow:_0_0_5px_rgba(0,0,0,0.7)] hover:[text-shadow:_0_3px_10px_rgba(255,255,255,0.7)]">Amazing Clickstream</button>
+                <h1 id="clicks" class="text-4xl font-[Syne] font-bold text-blue-900 mx-auto my-4">Clicks: </h1>
+                <button onclick="clicked()" class="rounded-full border-4 border-blue-700 w-5/6 aspect-square my-6 flex items-center justify-center transition-all duration-300 ease-in-out hover:scale-110 active:scale-50">Click</button>
+            </div>
+            <div class="flex flex-col w-6/12 h-screen">
+                <div class="font-[Syne] text-blue-800 h-1/5 border-b-4 border-blue-900">Menu</div>
+                <div class="font-[Syne] text-blue-800 h-3/5 border-b-4 border-t-4 border-blue-900 flex flex-col">Mini display
+                    <div id="message" class="font-[Syne] text-3xl font-bold text-sky-200 bg-blue-600 max-w-max p-3 mx-auto rounded-xl border-4 border-blue-700 my-4">Messages come here</div>
+                    <div id="inventory" class="font-[Syne] text-2xl font-bold text-sky-200 bg-blue-600 w-3/4 p-3 mx-auto rounded-xl border-4 border-blue-700 my-4">Inventory
+                        <p id="InvCursor" class="font-[Syne] text-xl text-sky-200 mx-auto">Cursors: </p>
+                    </div>
+                </div>
+                <div class="font-[Syne] text-blue-800 h-1/5 border-t-4 border-blue-900">Upgrades</div>
+            </div>
+            <div class="flex flex-col justify-center w-2/12 border-l-8 border-blue-800 h-screen">
+                <h1 class="text-4xl font-[Syne] font-bold text-blue-900">Store</h1>
+                <button id="cursor" onclick="buy(this)" class="font-[Syne] text-xl p-2 my-4 max-w-max mx-auto text-blue-400 bg-blue-700 border-4 border-blue-900 rounded-xl transition-all duration-500 ease-in-out hover:scale-110 hover:shadow-[0_0_20px_rgba(0,151,255,1)] active:scale-50">Cursor +1: 10 Clicks</button>
+            </div>
+        </div>
+        <script>
+            let Tclicks = 0;
+            let Cpower = 1;
+            let Cpassive = 0;
+            let Vclicks = 0;
+            
+            let powerUP = 0;
+            let passiveUP = 0;
+
+            let buildings = {
+                cursor: { price: 10, count: 0, power: 1 }
+            }
+
+            setInterval(() => {
+                let add = 0;
+                if (Vclicks < Tclicks) {
+                    add = Math.ceil((Tclicks - Vclicks) * 0.1)
+                    Vclicks += add
+                }
+                document.getElementById('clicks').textContent = `Clicks: ${Vclicks}`;
+            }, 30)
+
+            setInterval(() => {
+                Tclicks += Cpassive
+                document.getElementById('InvCursor').textContent = `Cursors: ${buildings['cursor'].count}`
+            }, 1000);
+
+            function clicked() {
+                Tclicks += Cpower;
+            }
+
+            function buy(btn) {
+                let bought = btn.id;
+                let item = buildings[bought];
+
+                if (Tclicks >= item.price) {
+                    Tclicks -= item.price;
+                    Vclicks -= item.price;
+                    item.count++;
+                    activatebuffs()
+                    item.price = Math.floor(item.price * 1.15);
+                    btn.textContent = `${bought}: ${item.price} Clicks`;
+                }
+                else {
+                    document.getElementById('message').textContent = `Not Enough Clicks! You need ${item.price - Tclicks} more Clicks!`;
+                }
+            }
+
+            function activatebuffs() {
+                Cpassive = 0;
+                for (let item in buildings) {
+                    let buff = buildings[item];
+                    Cpassive += (buff.count * buff.power);
+                }
+            }
+            
+        </script>
+    </body>
