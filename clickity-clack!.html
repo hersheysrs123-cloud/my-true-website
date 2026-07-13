@@ -11,22 +11,23 @@
         <div class="flex flex-row items-center h-screen">
             <div class="flex flex-col justify-center items-center w-4/12 border-r-8 border-blue-800 h-screen">
                 <button class="text-3xl font-[Syne] font-bold text-blue-900 mx-auto my-6 transition duration-200 ease-in-out [text-shadow:_0_0_5px_rgba(0,0,0,0.7)] hover:[text-shadow:_0_3px_10px_rgba(255,255,255,0.7)]">Amazing Clickstream</button>
-                <h1 id="clicks" class="text-4xl font-[Syne] font-bold text-blue-900 mx-auto my-4">Clicks: </h1>
+                <h1 id="clicks" class="text-4xl font-[Syne] font-bold text-blue-900 mx-auto my-2">Clicks: </h1>
+                <p id="passive" class="text-xl font-[Syne] font-bold text-blue-800 mx-auto my-0">CPS: 0</p>
                 <button onclick="clicked()" class="rounded-full border-4 border-blue-700 w-5/6 aspect-square my-6 flex items-center justify-center transition-all duration-300 ease-in-out hover:scale-110 active:scale-50">Click</button>
             </div>
-            <div class="flex flex-col w-6/12 h-screen">
+            <div class="flex flex-col w-5/12 h-screen">
                 <div class="font-[Syne] text-blue-800 h-1/5 border-b-4 border-blue-900">Menu</div>
-                <div class="font-[Syne] text-blue-800 h-3/5 border-b-4 border-t-4 border-blue-900 flex flex-col">Mini display
+                <div class="font-[Syne] text-blue-800 h-3/5 border-b-4 border-t-4 border-blue-900 flex flex-col overflow-y-auto">Mini display
                     <div id="message" class="font-[Syne] text-3xl font-bold text-sky-200 bg-blue-600 max-w-max p-3 mx-auto rounded-xl border-4 border-blue-700 my-4">Messages come here</div>
                     <div id="inventory" class="font-[Syne] text-2xl font-bold text-sky-200 bg-blue-600 w-3/4 p-3 mx-auto rounded-xl border-4 border-blue-700 my-4">Inventory
-                        <p id="InvCursor" class="font-[Syne] text-xl text-sky-200 mx-auto">Cursors: </p>
+                        <div id="inventory_container" class="flex flex-col font-[Syne] text-xl text-sky-200 mx-auto"></div>
                     </div>
                 </div>
                 <div class="font-[Syne] text-blue-800 h-1/5 border-t-4 border-blue-900">Upgrades</div>
             </div>
-            <div class="flex flex-col justify-center w-2/12 border-l-8 border-blue-800 h-screen">
-                <h1 class="text-4xl font-[Syne] font-bold text-blue-900">Store</h1>
-                <button id="cursor" onclick="buy(this)" class="font-[Syne] text-xl p-2 my-4 max-w-max mx-auto text-blue-400 bg-blue-700 border-4 border-blue-900 rounded-xl transition-all duration-500 ease-in-out hover:scale-110 hover:shadow-[0_0_20px_rgba(0,151,255,1)] active:scale-50">Cursor +1: 10 Clicks</button>
+            <div class="flex flex-col w-3/12 border-l-8 border-blue-800 h-screen p-2 overflow-y-auto">
+                <h1 class="text-4xl font-[Syne] font-bold text-blue-900 my-4">Store</h1>
+                <div id="shop" class="flex flex-col"></div>
             </div>
         </div>
         <script>
@@ -39,7 +40,26 @@
             let passiveUP = 0;
 
             let buildings = {
-                cursor: { price: 10, count: 0, power: 1 }
+                cursor: {Vtext: "Cursor", Tprice: '10', price: 10, count: 0, power: 1 , desc: 'Autoclicks every 1 second'},
+                grandpa: {Vtext: "Grandpa", Tprice: '100', price: 100, count: 0, power: 10, desc: 'Hobbyist Clicker, Pro Gamer'},
+                phone: {Vtext: "Phone", Tprice: '1,000', price: 1_000, count: 0, power: 100, desc: 'Generates clicks through social media'},
+                laptop: {Vtext: "Laptop", Tprice: '50,000', price: 50_000, count: 0, power: 5_000, desc: 'Automates clicks through powerful code'},
+                gamer: {Vtext: "Gamer", Tprice: '200,000', price: 200_000, count: 0, power: 15_000 , desc: 'Jitter clicks super fast'},
+                gpu: {Vtext: "GPU", Tprice: '1 million', price: 1_000_000, count: 0, power: 80_000, desc: 'Runs simultaneous operations for clicking'},
+                aurafarmer: {Vtext: "AuraFarmer", Tprice: '12 million', price: 12_000_000, count: 0, power: 1_000_000, desc: 'Farms clicks through pure AURA'},
+                supercomputer: {Vtext: "Supercomputer", Tprice: '150 million', price: 150_000_000, count: 0, power: 14_000_000, desc: 'Multitasking madhouse, click destroyer'},
+                ai: {Vtext: "Artificial Intelligence", Tprice: '900 million', price: 900_000_000, count: 0, power: 100_000_000 , desc: 'Artificial Intelligence launches sub-agents that click at godlike speeds'},
+                warehouse: {Vtext: "Warehouse", Tprice: '10 billion', price: 10_000_000_000, count: 0, power: 950_000_000, desc: 'Space for all the machines to come'},
+                bank: {Vtext: "Bank", Tprice: '50 billion', price: 50_000_000_000, count: 0, power: 5_500_000_000, desc: 'Funding + Clinck-vesting'},
+                solar_panel: {Vtext: "Solar Panel", Tprice: '400 billion', price: 400_000_000_000, count: 0, power: 30_000_000_000, desc: 'eco-friendly electicity for the GPUs + converts rays to clicks'},
+                windmill: {Vtext: "Windmill", Tprice: '1 trillion', price: 1_000_000_000_000, count: 0, power: 110_000_000_000 , desc: 'generates clicks from the air (clicktricity)'},
+                cloud_console: {Vtext: "Cloud Console", Tprice: '13 trillion', price: 13_000_000_000_000, count: 0, power: 1_100_000_000_000, desc: 'harvesting clicks from the clouds'},
+                spaceship: {Vtext: "Spaceship", Tprice: '30 trillion', price: 30_000_000_000_000, count: 0, power: 2_300_000_000_000, desc: 'Exploring space to collect interstellar clicks'},
+                research_lab: {Vtext: "Research Lab", Tprice: '200 trillion', price: 200_000_000_000_000, count: 0, power: 18_000_000_000_000, desc: 'Converting molecules to clicks'},
+                bio_pods: {Vtext: "Bio Pods", Tprice: '1 quadrillion', price: 1_000_000_000_000_000, count: 0, power: 105_000_000_000_000 , desc: 'Forming living clicks'},
+                wave_phyiscs: {Vtext: "Wave Physics", Tprice: '15 quadrillion', price: 15_000_000_000_000_000, count: 0, power: 1_200_000_000_000_000, desc: 'Obtaining clicks through waves and string theory'},
+                sloth: {Vtext: "sloth", Tprice: '170 quadrillion', price: 170_000_000_000_000_000, count: 0, power: 14_000_000_000_000_000, desc: 'Moves so slow that it speeds up time, while generating clicks through extemely precise movements'},
+                Rebirth: {Vtext: "REBIRTH", Tprice: '1 quintillion', price: 1_000_000_000_000_000_000, count: 0, power: 0, desc: 'press this if u wanna live again - from the beginning (-1% cooldown for passive)'}
             }
 
             setInterval(() => {
@@ -50,16 +70,12 @@
                 }
                 document.getElementById('clicks').textContent = `Clicks: ${Vclicks}`;
             }, 30)
-
             setInterval(() => {
                 Tclicks += Cpassive
-                document.getElementById('InvCursor').textContent = `Cursors: ${buildings['cursor'].count}`
             }, 1000);
-
             function clicked() {
                 Tclicks += Cpower;
             }
-
             function buy(btn) {
                 let bought = btn.id;
                 let item = buildings[bought];
@@ -71,12 +87,13 @@
                     activatebuffs()
                     item.price = Math.floor(item.price * 1.15);
                     btn.textContent = `${bought}: ${item.price} Clicks`;
+                    renderInv();
+                    renderCPS();
                 }
                 else {
                     document.getElementById('message').textContent = `Not Enough Clicks! You need ${item.price - Tclicks} more Clicks!`;
                 }
             }
-
             function activatebuffs() {
                 Cpassive = 0;
                 for (let item in buildings) {
@@ -84,6 +101,36 @@
                     Cpassive += (buff.count * buff.power);
                 }
             }
+            function renderShop() {
+                for (let key in buildings) {
+                    let item = buildings[key];
+                    const shop_button = document.createElement("button");
+                    shop_button.textContent = `${item.Vtext}: ${item.Tprice} ⬩➤`;
+                    shop_button.classList.add("font-[Syne]", "text-lg", "border-4", "border-blue-600", "bg-blue-500", "rounded-xl", "w-full", "mx-auto", "p-2", "my-2", "transition-all", "hover:scale-105", "duration-500", "ease-in-out");
+                    shop_button.id = `${key}`;
+                    shop_button.onclick = function() { buy(this); };
+                    const container = document.getElementById('shop');
+                    container.appendChild(shop_button);
+                }
+            }
+            function renderInv() {
+                const container = document.getElementById('inventory_container');
+                container.innerHTML= "";
+                for (let key in buildings) {
+                    let item = buildings[key];
+                    if (item.count > 0) {
+                        const inv_display = document.createElement("p");
+                        inv_display.textContent = `${item.Vtext}: ${item.count}`;
+                        inv_display.classList.add("font-[Syne]", "text-md", "border-4", "border-blue-600", "bg-blue-500", "rounded-xl", "w-full", "mx-auto", "p-2", "my-2");
+                        container.appendChild(inv_display);
+                    }
+                }
+            }
+            function renderCPS() {
+                document.getElementById('passive').textContent = `CPS: ${Cpassive}`
+            }
+            renderShop();
             
+
         </script>
     </body>
