@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>Harshith RS - Games</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap" rel="stylesheet">
+    </head>
+    <body class="bg-blue-400 text-center h-screen">
+        <div id="game" class="hidden h-screen">
+            <div class="h-1/6">
+                <h1 class="text-6xl font-[Syne] font-bold text-blue-800 mx-auto my-6 [text-shadow:0_5px_10px_rgba(150,255,255,1)]">Tic Tac Toe</h1>
+                <div class="border-4 border-blue-800/50 rounded-xl shadow-[0_0_20px_rgba(0,151,255,1)] mt-6"></div>
+            </div>
+            <div class="h-4/6 flex flex-row justify-center items-center">
+                <div class="flex flex-col w-1/3">
+                    <p id="wins" class="border-4 border-blue-600 text-blue-800 bg-blue-300 font-bold font-[Syne] rounded-xl max-w-max mx-auto text-4xl p-4 my-4">
+                        Wins <br>
+                        X: 0<br>
+                        O: 0
+                    </p>
+                    <p id="turn" class="border-4 border-blue-600 text-blue-800 bg-blue-300 font-bold font-[Syne] rounded-xl max-w-max mx-auto text-4xl p-4 my-4">Turn: X (1)</p>
+                </div>
+                <div class="flex flex-col w-1/3">
+                    <div class="flex flex-row justify-center items-center">
+                        <button data-num="0" onclick="clicked(this.id)" id="top_left" class="text-6xl font-bold font-[Syne] shadow-[inset_0_0_30px_rgba(0,255,255,0.6)] aspect-square border-4 border-blue-600 rounded-tl-xl w-28 transition-all hover:scale-110 duration-500 ease-in-out hover:shadow-[0_0_20px_rgba(0,151,255,1),_10px_0_40px_rgba(0,151,255,1),_-10px_0_40px_rgba(0,151,255,1),_0_0_200px_rgba(0,151,255,1)]"></button>
+                        <button data-num="1" onclick="clicked(this.id)" id="top_middle" class="text-6xl font-bold font-[Syne] shadow-[inset_0_0_30px_rgba(0,255,255,0.6)] aspect-square border-4 border-blue-600 w-28 transition-all hover:scale-110 duration-500 ease-in-out hover:shadow-[0_0_20px_rgba(0,151,255,1),_10px_0_40px_rgba(0,151,255,1),_-10px_0_40px_rgba(0,151,255,1),_0_0_200px_rgba(0,151,255,1)]"></button>
+                        <button data-num="2" onclick="clicked(this.id)" id="top_right" class="text-6xl font-bold font-[Syne] shadow-[inset_0_0_30px_rgba(0,255,255,0.6)] aspect-square border-4 border-blue-600 rounded-tr-xl w-28 transition-all hover:scale-110 duration-500 ease-in-out hover:shadow-[0_0_20px_rgba(0,151,255,1),_10px_0_40px_rgba(0,151,255,1),_-10px_0_40px_rgba(0,151,255,1),_0_0_200px_rgba(0,151,255,1)]"></button>
+                    </div>
+                    <div class="flex flex-row justify-center items-center">
+                        <button data-num="3" onclick="clicked(this.id)" id="middle_left" class="text-6xl font-bold font-[Syne] shadow-[inset_0_0_30px_rgba(0,255,255,0.6)] aspect-square border-4 border-blue-600 w-28 transition-all hover:scale-110 duration-500 ease-in-out hover:shadow-[0_0_20px_rgba(0,151,255,1),_10px_0_40px_rgba(0,151,255,1),_-10px_0_40px_rgba(0,151,255,1),_0_0_200px_rgba(0,151,255,1)]"></button>
+                        <button data-num="4" onclick="clicked(this.id)" id="middle_middle" class="text-6xl font-bold font-[Syne] shadow-[inset_0_0_30px_rgba(0,255,255,0.6)] aspect-square border-4 border-blue-600 w-28 transition-all hover:scale-110 duration-500 ease-in-out hover:shadow-[0_0_20px_rgba(0,151,255,1),_10px_0_40px_rgba(0,151,255,1),_-10px_0_40px_rgba(0,151,255,1),_0_0_200px_rgba(0,151,255,1)]"></button>
+                        <button data-num="5" onclick="clicked(this.id)" id="middle_right" class="text-6xl font-bold font-[Syne] shadow-[inset_0_0_30px_rgba(0,255,255,0.6)] aspect-square border-4 border-blue-600 w-28 transition-all hover:scale-110 duration-500 ease-in-out hover:shadow-[0_0_20px_rgba(0,151,255,1),_10px_0_40px_rgba(0,151,255,1),_-10px_0_40px_rgba(0,151,255,1),_0_0_200px_rgba(0,151,255,1)]"></button>
+                    </div>
+                    <div class="flex flex-row justify-center items-center">
+                        <button data-num="6" onclick="clicked(this.id)" id="bottom_left" class="text-6xl font-bold font-[Syne] shadow-[inset_0_0_30px_rgba(0,255,255,0.6)] aspect-square border-4 border-blue-600 rounded-bl-xl w-28 transition-all hover:scale-110 duration-500 ease-in-out hover:shadow-[0_0_20px_rgba(0,151,255,1),_10px_0_40px_rgba(0,151,255,1),_-10px_0_40px_rgba(0,151,255,1),_0_0_200px_rgba(0,151,255,1)]"></button>
+                        <button data-num="7" onclick="clicked(this.id)" id="bottom_middle" class="text-6xl font-bold font-[Syne] shadow-[inset_0_0_30px_rgba(0,255,255,0.6)] aspect-square border-4 border-blue-600 w-28 transition-all hover:scale-110 duration-500 ease-in-out hover:shadow-[0_0_20px_rgba(0,151,255,1),_10px_0_40px_rgba(0,151,255,1),_-10px_0_40px_rgba(0,151,255,1),_0_0_200px_rgba(0,151,255,1)]"></button>
+                        <button data-num="8" onclick="clicked(this.id)" id="bottom_right" class="text-6xl font-bold font-[Syne] shadow-[inset_0_0_30px_rgba(0,255,255,0.6)] aspect-square border-4 border-blue-600 rounded-br-xl w-28 transition-all hover:scale-110 duration-500 ease-in-out hover:shadow-[0_0_20px_rgba(0,151,255,1),_10px_0_40px_rgba(0,151,255,1),_-10px_0_40px_rgba(0,151,255,1),_0_0_200px_rgba(0,151,255,1)]"></button>
+                    </div>
+                </div>
+                <div class="flex flex-col w-1/3">
+                    <button onclick="backMenu()" class="border-4 border-blue-600 text-blue-800 bg-blue-400 font-bold font-[Syne] rounded-xl max-w-max mx-auto my-6 text-4xl p-4 transition-all hover:scale-125 duration-500 ease-in-out active:scale-50">Back to Menu</button>
+                    <button onclick="reset()" class="border-4 border-blue-600 text-blue-800 bg-blue-300 font-bold font-[Syne] rounded-xl max-w-max mx-auto my-6 text-4xl p-4 transition-all hover:scale-125 duration-500 ease-in-out active:scale-50">Reset Board</button>
+                </div>    
+            </div>
+            <div class="border-4 border-blue-600 rounded-xl h-1/6 shadow-[inset_0_0_30px_rgba(0,151,255,1),0_0_30px_rgba(0,255,255,0.6)]">
+                <h1 id="msgbox" class="text-xl font-[Syne] font-bold text-blue-800 mx-auto max-w-max my-4">Play!</h1>
+            </div>
+        </div>
+
+        <div id="start" class="block h-screen flex flex-col">
+            <h1 class="text-8xl font-[Syne] font-extrabold text-blue-800 mx-auto mt-20 mb-6 [text-shadow:0_5px_10px_rgba(150,255,255,1)]">Tic Tac Toe</h1>
+            <button onclick="startGame()" class="border-4 border-blue-600 my-12 text-blue-800 bg-blue-300 font-bold font-[Syne] rounded-xl max-w-max mx-auto text-4xl p-4 transition-all hover:scale-125 duration-500 ease-in-out active:scale-50">Play 1v1</button>
+            <div class="items-center border-4 border-blue-600 bg-blue-400 rounded-xl max-w-max mx-auto p-4 flex flex-row"><pre class=" text-blue-800 text-4xl font-bold font-[Syne]">Play AI:  </pre>
+                <button id="Easy" onclick="playAI(this)" class="border-4 border-blue-600 text-blue-800 bg-blue-300 font-bold font-[Syne] rounded-xl max-w-max mx-4 text-4xl p-4 transition-all hover:scale-125 duration-500 ease-in-out active:scale-50">Easy</button>
+                <button id="Medium" onclick="playAI(this)" class="border-4 border-blue-600 text-blue-800 bg-blue-300 font-bold font-[Syne] rounded-xl max-w-max mx-4 text-4xl p-4 transition-all hover:scale-125 duration-500 ease-in-out active:scale-50">Medium</button>
+                <button id="Hard" onclick="playAI(this)" class="border-4 border-blue-600 text-blue-800 bg-blue-300 font-bold font-[Syne] rounded-xl max-w-max mx-4 text-4xl p-4 transition-all hover:scale-125 duration-500 ease-in-out active:scale-50">Hard</button>
+            </div>
+        </div>
+        <script>
+            function startGame() {
+                document.getElementById('start').classList.remove('block');
+                document.getElementById('game').classList.remove('hidden');
+                document.getElementById('start').classList.add('hidden');
+                document.getElementById('game').classList.add('block');
+                AIplays = false;
+            }
+            function backMenu() {
+                document.getElementById('start').classList.remove('hidden');
+                document.getElementById('game').classList.remove('block');
+                document.getElementById('start').classList.add('block');
+                document.getElementById('game').classList.add('hidden');
+                reset();
+            }
+            let difficulty = "";
+            let AIplays = false;
+            let turn = 1;
+            let board = ["", "", "", "", "", "", "", "", ""];
+            let msgbox = document.getElementById('msgbox');
+            let winsX = 0;
+            let winsO = 0;
+            let turnvar = "";
+            let gameActive = true;
+            const WinConditions = [
+                    [0, 1, 2],
+                    [3, 4, 5],
+                    [6, 7, 8],
+                    [0, 3, 6],
+                    [1, 4, 7],
+                    [2, 5, 8],
+                    [0, 4, 8],
+                    [2, 4, 6]
+                ]
+
+            function playAI(btn) {
+                difficulty = btn.id;
+                console.log(difficulty);
+                startGame();            
+                AIplays = true;   
+            }
+            function clicked(clickedId) {
+                if (!gameActive) return;
+                let button = document.getElementById(clickedId);
+                let index = parseInt(button.getAttribute('data-num'));
+                if (button.textContent === "O" || button.textContent === "X") {
+                    msgbox.textContent = "You can't place X or O on top of an already existing tile!";
+                    return;
+                }
+                else {
+                    if (turn % 2 === 1) {
+                        button.textContent = "X";
+                        board[index] = "X";
+                        checkGameStatus()
+                        turn += 1
+                        Dturn()
+                        if (gameActive && AIplays) {
+                            AImoves(); 
+                        }
+                    }
+                    else {
+                        button.textContent = "O";
+                        board[index] = "O"
+                        turn += 1;
+                        Dturn();
+                        checkGameStatus();
+                    }
+                }
+            }
+            function checkGameStatus() {
+                let gameWon = false;
+                for (let win = 0; win < WinConditions.length; win++) {
+                    const conditions = WinConditions[win];
+                    let a = board[conditions[0]];
+                    let b = board[conditions[1]];
+                    let c = board[conditions[2]];
+                    if (a !== "" && a === b && a === c) {
+                        gameWon = true;
+                        gameActive = false;
+                        msgbox.textContent = `${a} Wins!`;
+                        if (a === "X") {
+                            winsX++;
+                        }
+                        else {
+                            winsO++;
+                        }
+                        document.getElementById('wins').innerHTML = `Wins<br>X: ${winsX}<br>O: ${winsO}`;
+                        gameActive = false;
+                        break;
+                    }
+                }
+                if (!gameWon && !board.includes("")) {
+                    msgbox.textContent = "It's a Draw!";
+                    gameActive = false;
+                }
+                
+            }
+            function reset() {
+                turn = 1;
+                board = ["", "", "", "", "", "", "", "", ""];
+                let buttons = document.querySelectorAll('[data-num]');
+                buttons.forEach(btn => btn.textContent = "");
+                document.getElementById('msgbox').textContent = "Play!";
+                gameActive = true;
+                Dturn();
+            }
+            function Dturn() {
+                let nextPlayer = (turn % 2 === 0) ? "O" : "X";
+                if (gameActive) {
+                    document.getElementById('turn').textContent = `Turn: ${nextPlayer} (${turn})`
+                }
+            }
+            function evaluateBoard(boardtype) {
+                let IgameWon = false;
+                for (let win = 0; win < WinConditions.length; win++) {
+                    const conditions = WinConditions[win];
+                    let a = boardtype[conditions[0]];
+                    let b = boardtype[conditions[1]];
+                    let c = boardtype[conditions[2]];
+                    if (a !== "" && a === b && a === c) {
+                        IgameWon = true;
+                        if (a === "X") {
+                            return "X";
+                        }
+                        else {
+                            return "O";
+                        }
+                        break;
+                    }
+                }
+                if (!IgameWon && !boardtype.includes("")) {
+                    return "draw";
+                }
+                return null;
+            }
+            let isAI = true;
+            function minimax(boardtype, isAI) {
+                let Iboard = [...boardtype];
+                let scoreState = evaluateBoard(Iboard);
+                if (scoreState === "X") {
+                    return -10;
+                }
+                else if (scoreState === "O") {
+                    return 10;
+                }
+                else if (scoreState === "draw") {
+                    return 0;
+                }
+                let Squares = [];
+                let targetIndex;
+                let scores = [];
+                for (let i = 0; i <Iboard.length; i++) {
+                    if (Iboard[i] === "") Squares.push(i);
+                }
+                let Bscore = 0;
+                if (Squares.length === 0) return;
+                for (let i = 0; i < Squares.length; i++) {
+                    Iboard[Squares[i]] = isAI ? "O" : "X";                  
+                    scores.push(minimax(Iboard, !isAI));
+                    Iboard[Squares[i]] = "";                    
+                }
+                if (isAI) {
+                    Bscore = Math.max(...scores);
+                }
+                else {
+                    Bscore = Math.min(...scores);
+                }
+                return Bscore;
+            }
+            function AImoves() {
+                let Squares = [];
+                let targetIndex;
+                AIplays = true;
+                for (let i = 0; i < board.length; i++) {
+                    if (board[i] === "") Squares.push(i);
+                }
+                if (Squares.length === 0) return;
+
+                if (difficulty === "Easy") {
+                    let randIndex = Math.floor(Math.random() * Squares.length);
+                    targetIndex = Squares[randIndex];
+                }
+                else if (difficulty === "Medium") {
+                    let moveFound = false;
+                    for (let win = 0; win < WinConditions.length; win++) {
+                        const conditions = WinConditions[win];
+                        let a = board[conditions[0]];
+                        let b = board[conditions[1]];
+                        let c = board[conditions[2]];
+                        if (a === "X" && b === "X" && c === "") {
+                            targetIndex = conditions[2];
+                            moveFound = true;
+                            break;
+                        }
+                        else if (a === "X" && b === "" && c === "X") {
+                            targetIndex = conditions[1];
+                            moveFound = true;
+                            break;
+                        }
+                        else if (a === "" && b === "X" && c === "X") {
+                            targetIndex = conditions[0];
+                            moveFound = true;
+                            break;
+                        }
+                    }
+                    if (!moveFound) {
+                        let randIndex = Math.floor(Math.random() * Squares.length);
+                        targetIndex = Squares[randIndex];
+                    }
+                }
+                else {
+                    let maxS = -Infinity;
+                    let maxI;
+                    let score = 0;
+                    for (let i = 0; i < Squares.length; i++) {
+                        board[Squares[i]] = "O";
+                        score = minimax(board, false);
+                        board[Squares[i]] = "";
+                        if (score > maxS) {
+                            maxS = score;
+                            maxI = i;
+                        }                        
+                    }
+                    targetIndex = Squares[maxI];
+                }
+                board[targetIndex] = "O";
+                document.querySelector(`[data-num="${targetIndex}"]`).textContent = "O";
+                turn += 1;
+                Dturn();
+                checkGameStatus();
+            }
+        </script>
+    </body>
