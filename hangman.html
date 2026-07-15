@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>Harshith RS - Games</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap" rel="stylesheet">
+    </head>
+    <body class="bg-blue-400 text-center">
+        <div id="start" class="block h-screen flex flex-col">
+            <h1 class="text-8xl font-[Syne] font-extrabold text-blue-800 mx-auto mt-10 mb-6 [text-shadow:0_5px_10px_rgba(150,255,255,1)]">Hangman</h1>
+            <div class="items-center border-4 border-blue-600 bg-blue-400 rounded-xl max-w-max mx-auto p-4 flex flex-row"><pre class=" text-blue-800 text-4xl font-bold font-[Syne]">Play:  </pre>
+                <button id="Easy" onclick="" class="border-4 border-blue-600 text-blue-800 bg-blue-300 font-bold font-[Syne] rounded-xl max-w-max mx-4 text-4xl p-4 transition-all hover:scale-125 duration-500 ease-in-out active:scale-50">Easy</button>
+                <button id="Medium" onclick="" class="border-4 border-blue-600 text-blue-800 bg-blue-300 font-bold font-[Syne] rounded-xl max-w-max mx-4 text-4xl p-4 transition-all hover:scale-125 duration-500 ease-in-out active:scale-50">Medium</button>
+                <button id="Hard" onclick="" class="border-4 border-blue-600 text-blue-800 bg-blue-300 font-bold font-[Syne] rounded-xl max-w-max mx-4 text-4xl p-4 transition-all hover:scale-125 duration-500 ease-in-out active:scale-50">Hard</button>
+            </div>
+            <button onclick="catMenu()" class="border-4 border-blue-600 my-6 text-blue-800 bg-blue-300 font-bold font-[Syne] rounded-xl max-w-max mx-auto text-4xl p-4 transition-all hover:scale-125 duration-500 ease-in-out active:scale-50">Category</button>
+            <button onclick="startGame()" class="border-4 border-blue-600 text-blue-800 bg-blue-300 font-bold font-[Syne] rounded-xl max-w-max mx-auto text-4xl p-4 transition-all hover:scale-125 duration-500 ease-in-out active:scale-50">Play</button>
+        </div>
+        <div id="game" class="hidden h-screen">
+            <div class="h-1/6">
+                <h1 class="text-6xl font-[Syne] font-bold text-blue-800 mx-auto my-6 [text-shadow:0_5px_10px_rgba(150,255,255,1)]">Hangman</h1>
+                <div class="border-4 border-blue-800/50 rounded-xl shadow-[0_0_20px_rgba(0,151,255,1)] mt-6"></div>
+            </div>
+            <div class="h-4/6 flex flex-row">
+                <div class="w-1/4 h-full">
+                    <!--Hangman Drawing-->
+                </div>
+                <div class="w-1/2 h-full">
+                    <!--Gameboard logic to implement tomorrow-->
+                </div>
+                <div class="w-1/4 border-l-4 border-t-4 rounded-tl-xl border-blue-600 h-full">
+                    <!--Screen Keyboard-->
+                </div>
+            </div>
+            <div class="border-4 border-blue-600 rounded-xl h-1/6 shadow-[inset_0_0_30px_rgba(0,151,255,1),0_0_30px_rgba(0,255,255,0.6)]">
+                <h1 id="msgbox" class="text-xl font-[Syne] font-bold text-blue-800 mx-auto max-w-max my-4">Play! Start Typing! Or click on the keys on the left!</h1>
+            </div>
+        </div>
+        <div id="category" class="hidden h-screen overflow-y-auto">
+            <div class="items-center justify-center border-4 border-blue-800 bg-blue-600 rounded-xl max-w-max mx-auto my-12 p-6 flex flex-col">
+                <button onclick="backMenu('category')" class="border-4 border-blue-700 my-6 text-blue-800 bg-blue-300 font-bold font-[Syne] rounded-xl max-w-max mx-auto text-4xl p-4 transition-all hover:scale-125 duration-500 ease-in-out active:scale-50">Back</button>
+                <div class="flex flex-row">
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Science Fiction</button>
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Gaming</button>
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Tamil Movies</button>
+                </div>
+                <div class="flex flex-row">
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Hardware</button>
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Artificial Intelligence</button>
+                </div>
+                <div class="flex flex-row">
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Software</button>
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Harry Potter</button>
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Percy Jackson</button>
+                </div>
+                <div class="flex flex-row">
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Science</button>
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Math (Basic)</button>
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Math (Advanced)</button>
+                </div>
+                <div class="flex flex-row">
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Nature</button>
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Animals</button>
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Food</button>
+                </div>
+                <div class="flex flex-row">
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Countries</button>
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Sports</button>
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Brands</button>
+                </div>
+                <div class="flex flex-row">
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Songs (English)</button>
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Random (from here)</button>
+                </div>
+                <div class="flex flex-row">
+                    <button class="border-4 border-blue-400 text-blue-200 bg-blue-500 font-bold font-[Syne] rounded-xl my-2 max-w-max mx-3 text-4xl p-4 transition-all hover:scale-110 duration-500 ease-in-out active:scale-75">Random (random word, no category)</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            function startGame() {
+                document.getElementById('start').classList.remove('block');
+                document.getElementById('game').classList.remove('hidden');
+                document.getElementById('start').classList.add('hidden');
+                document.getElementById('game').classList.add('block');
+            }
+            function backMenu(viewName) {
+                if (viewName === "category") {
+                    document.getElementById('category').classList.remove('block');
+                    document.getElementById('category').classList.add('hidden');
+                }
+                else {
+                    document.getElementById('game').classList.remove('block');
+                    document.getElementById('game').classList.add('hidden');
+                }
+                document.getElementById('start').classList.remove('hidden');
+                document.getElementById('start').classList.add('block');
+                reset();
+            }
+            function catMenu() {
+                document.getElementById('start').classList.remove('block');
+                document.getElementById('category').classList.remove('hidden');
+                document.getElementById('start').classList.add('hidden');
+                document.getElementById('category').classList.add('block');
+            }
+            function chooseCategory() {
+
+            }
+            function reset() {
+                
+            }
+        </script>
+    </body>
